@@ -10,6 +10,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'editorconfig/editorconfig-vim'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -33,6 +34,12 @@ let g:javascript_conceal_function = "ƒ"
 syntax enable
 set number relativenumber
 set cursorline
+
+set ignorecase
+set smartcase
+
+set foldmethod=indent
+set foldlevel=99
 
 set background=light
 colorscheme solarized
