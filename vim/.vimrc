@@ -63,6 +63,8 @@ highlight CursorLineNr ctermbg=LightGray
 :map r h
 :map t l
 
+:noremap l t
+
 :map <Leader>f :Files<CR>
 :map <Leader>F :Find<CR>
 
