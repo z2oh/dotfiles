@@ -11,6 +11,9 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -30,6 +33,7 @@ let mapleader = ","
 
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_conceal_function = "ƒ"
+let g:airline_powerline_fonts = 1
 
 syntax enable
 set number relativenumber
@@ -38,11 +42,13 @@ set cursorline
 set ignorecase
 set smartcase
 
+let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
 
 set background=light
 colorscheme solarized
+hi IndentGuidesEven ctermbg=LightGray
 
 highlight GitGutterAdd ctermfg=LightGreen ctermbg=LightGreen
 highlight GitGutterDelete ctermfg=LightRed ctermbg=LightRed
