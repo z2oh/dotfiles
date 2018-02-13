@@ -58,10 +58,10 @@ highlight GitGutterChangeDelete ctermfg=LightRed ctermbg=LightRed
 highlight CursorLineNr ctermbg=LightGray
 
 :imap tn <Esc>
-:map f gk
-:map s gj
-:map r h
-:map t l
+:noremap f gk
+:noremap s gj
+:noremap r h
+:noremap t l
 
 :noremap l t
 
