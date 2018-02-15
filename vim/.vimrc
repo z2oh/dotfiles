@@ -14,6 +14,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'rust-lang/rust.vim'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -47,6 +48,8 @@ set smartcase
 let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
+
+let g:rustfmt_autosave = 1
 
 set background=light
 colorscheme solarized
