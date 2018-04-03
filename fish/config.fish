@@ -3,7 +3,7 @@ setenv EDITOR vim
 setenv SSH_ENV $HOME/.ssh/environment
 setenv NPM_CONFIG_PREFIX ~/.npm-global
 
-set -x FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!bower_components/*"'
+set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --iglob "!.git/*" --iglob "!node_modules/*" --iglob "!bower_components/*"'
 set theme_color_scheme solarized-light
 
 function nvm
