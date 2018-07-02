@@ -9,12 +9,14 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Yggdroot/indentLine'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -29,6 +31,8 @@ endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 call plug#end()
+
+set termguicolors
 
 let mapleader = ","
 
@@ -52,8 +56,16 @@ set foldlevel=99
 let g:rustfmt_autosave = 1
 
 set background=light
-colorscheme solarized
-hi IndentGuidesEven ctermbg=LightGray
+colorscheme solarized8_flat
+
+" Indentation
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '·'
+set list listchars=tab:›\ ,eol:¬,trail:⋅
+
+let g:indent_guides_auto_colors = 0
+highlight IndentGuidesOdd  guibg=#f9e8cf
+highlight IndentGuidesEven guibg=#f9f1d9
 
 highlight GitGutterAdd ctermfg=LightGreen ctermbg=LightGreen
 highlight GitGutterDelete ctermfg=LightRed ctermbg=LightRed
@@ -96,3 +108,4 @@ set expandtab
 
 set clipboard=unnamedplus
 set clipboard+=autoselect
+
