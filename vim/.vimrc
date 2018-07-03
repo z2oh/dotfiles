@@ -24,7 +24,7 @@ function! BuildYCM(info)
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.py
+    !./install.py --js-completer --rust-completer
   endif
 endfunction
 
@@ -46,12 +46,17 @@ syntax enable
 set number relativenumber
 set cursorline
 
+set hidden
+let g:racer_cmd = '/home/jaday/.cargo/bin/racer'
+
 set ignorecase
 set smartcase
 
 let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
+
+set grepprg=rg\ --vimgrep
 
 let g:rustfmt_autosave = 1
 
@@ -82,6 +87,8 @@ highlight CursorLineNr ctermbg=LightGray
 
 :noremap l t
 
+nnoremap <Leader>,g :YcmCompleter GoTo<CR>
+
 :map <Leader>f :Files<CR>
 :map <Leader>F :Find<CR>
 
@@ -108,4 +115,3 @@ set expandtab
 
 set clipboard=unnamedplus
 set clipboard+=autoselect
-
