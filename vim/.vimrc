@@ -9,7 +9,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'lifepillar/vim-solarized8'
+Plug 'arcticicestudio/nord-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
@@ -43,11 +43,10 @@ let g:javascript_conceal_function = "ƒ"
 let g:airline_powerline_fonts = 1
 
 syntax enable
+autocmd BufEnter * :syntax sync fromstart
 set number relativenumber
+set colorcolumn=80,100
 set cursorline
-
-set hidden
-let g:racer_cmd = '/home/jaday/.cargo/bin/racer'
 
 set ignorecase
 set smartcase
@@ -60,8 +59,14 @@ set grepprg=rg\ --vimgrep
 
 let g:rustfmt_autosave = 1
 
-set background=light
-colorscheme solarized8_flat
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
+
+colorscheme nord
+
+hi! Normal ctermbg=NONE guibg=NONE
 
 " Indentation
 let g:indentLine_leadingSpaceEnabled = 1
@@ -69,15 +74,8 @@ let g:indentLine_leadingSpaceChar = '·'
 set list listchars=tab:›\ ,eol:¬,trail:⋅
 
 let g:indent_guides_auto_colors = 0
-highlight IndentGuidesOdd  guibg=#f9e8cf
-highlight IndentGuidesEven guibg=#f9f1d9
-
-highlight GitGutterAdd ctermfg=LightGreen ctermbg=LightGreen
-highlight GitGutterDelete ctermfg=LightRed ctermbg=LightRed
-highlight GitGutterChange ctermfg=LightYellow ctermbg=LightYellow
-highlight GitGutterChangeDelete ctermfg=LightRed ctermbg=LightRed
-
-highlight CursorLineNr ctermbg=LightGray
+highlight IndentGuidesOdd  guibg=#3b4252
+highlight IndentGuidesEven guibg=#434c5e
 
 :imap tn <Esc>
 :noremap f gk
