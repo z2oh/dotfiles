@@ -1,10 +1,9 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'pangloss/vim-javascript'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-syntastic/syntastic'
-Plug 'webdesus/polymer-ide.vim', { 'do': 'npm install' }
 Plug 'haya14busa/incsearch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -55,7 +54,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
 
-set grepprg=rg\ --vimgrep
 
 let g:rustfmt_autosave = 1
 
@@ -84,8 +82,6 @@ highlight IndentGuidesEven guibg=#434c5e
 :noremap t l
 
 :noremap l t
-
-nnoremap <Leader>,g :YcmCompleter GoTo<CR>
 
 :map <Leader>f :Files<CR>
 :map <Leader>F :Find<CR>
