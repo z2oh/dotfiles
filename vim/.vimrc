@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
+Plug 'SirVer/ultisnips'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -55,6 +56,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
 
+let g:UltiSnipsExpandTrigger="**"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ulti_snips']
 
 let g:rustfmt_autosave = 1
 
