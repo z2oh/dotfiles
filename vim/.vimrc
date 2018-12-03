@@ -1,41 +1,86 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'pangloss/vim-javascript'
+" Major features ===============================================================
+" Fuzzy file finder
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'vim-syntastic/syntastic'
-Plug 'haya14busa/incsearch.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'arcticicestudio/nord-vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'nathanaelkane/vim-indent-guides'
+" Powerline enabled status bar
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Directory tree/project explorer
+Plug 'scrooloose/nerdtree'
+" Buffer toolbar
+Plug 'fholgado/minibufexpl.vim'
+
+" Language support =============================================================
+" Support for language server and async code completion
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Rust language plugin
 Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/nerdcommenter'
+" Fish script language plugin
+Plug 'dag/vim-fish'
+
+" Minor features ===============================================================
+" Git/mercurial information in the gutter
+Plug 'airblade/vim-gitgutter'
+" Git support
+Plug 'tpope/vim-fugitive'
+" Modify or delete surrounding tags, ([{'" for example
+Plug 'tpope/vim-surround'
+" Causes searches to start jumping before <CR>
+Plug 'haya14busa/incsearch.vim'
+" Motions on speed!
+Plug 'easymotion/vim-easymotion'
+" Incorporates incremental searching with easy motion
+Plug 'haya14busa/incsearch-easymotion.vim'
+" Support for editorconfig
+Plug 'editorconfig/editorconfig-vim'
+" Displays indentation guides
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine'
-Plug 'SirVer/ultisnips'
+" Causes word motions to work with snake_case and CamelCase
+Plug 'chaoren/vim-wordmotion'
+" Allows for easy commenting
+Plug 'scrooloose/nerdcommenter'
 
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --js-completer --rust-completer
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" Themes =======================================================================
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif 
+
+" Set tab to perform autocomplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+" Remove preview window from autocomplete
+set completeopt-=preview
+
+" Remove duplicate entires in completion menu
+let g:asyncomplete_remove_duplicates = 1
+
+let g:EasyMotion_smartcase = 4
+set nomagic
+
 set termguicolors
 
-let mapleader = ","
+" Open NERDTree automatically if vim is started without a file.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close Vim if the only open window is a NERDTree window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
@@ -43,33 +88,32 @@ let g:javascript_plugin_jsdoc = 1
 let g:javascript_conceal_function = "ƒ"
 let g:airline_powerline_fonts = 1
 
+" Enable syntax highlighting and enable syntax checking for entire buffers
+" when they are opened
 syntax enable
 autocmd BufEnter * :syntax sync fromstart
+
 set number relativenumber
-set colorcolumn=80,100
+set mouse=a
+set colorcolumn=80,100,120
 set cursorline
+set backspace=indent,eol,start
+set textwidth=120
 
 set ignorecase
 set smartcase
+set spell
 
 let g:indent_guides_enable_on_vim_startup = 1
 set foldmethod=indent
 set foldlevel=99
 
-let g:UltiSnipsExpandTrigger="**"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ulti_snips']
+filetype plugin indent on
 
-let g:rustfmt_autosave = 1
+let g:airline_theme='papercolor'
 
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-let g:nord_cursor_line_number_background = 1
-
-colorscheme nord
+set background=light
+colorscheme PaperColor
 
 hi! Normal ctermbg=NONE guibg=NONE
 
@@ -78,35 +122,79 @@ let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 set list listchars=tab:›\ ,eol:¬,trail:⋅
 
-let g:indent_guides_auto_colors = 0
-highlight IndentGuidesOdd  guibg=#3b4252
-highlight IndentGuidesEven guibg=#434c5e
+" Let the theme style the indent guides
+let g:indent_guides_auto_colors=0
 
-:imap tn <Esc>
-:noremap f gk
-:noremap s gj
-:noremap r h
-:noremap t l
+" KEY MAPPINGS
+let mapleader = ","
 
-:noremap l t
+" Unbind `s` and `f` from NERDTree, as these keys are mapped to gk and gj
+" respectively. 
+let NERDTreeMapOpenVSplit='\s'
+let NERDTreeMapToggleFilters='\f'
 
-:map <Leader>f :Files<CR>
-:map <Leader>F :Find<CR>
+imap tn <Esc>
 
-:map /  <Plug>(incsearch-forward)
-:map ?  <Plug>(incsearch-backward)
-:map g/ <Plug>(incsearch-stay)
+" Use fsrt to move around files (esdf on QWERTY)
+noremap f gk
+noremap s gj
+noremap r h
+noremap t l
 
-:map z/ <Plug>(incsearch-easymotion-/)
-:map z? <Plug>(incsearch-easymotion-?)
-:map zg/ <Plug>(incsearch-easymotion-stay)
+" Use l as a mapping for 'till
+noremap l t
 
-:map ,S :source ~/.vimrc<CR>
-:map ,h :syntax sync fromstart<CR>
+" Use h as a mapping for replace
+noremap h r
+
+nmap ; :LspDefinition<CR>
+
+" Opposite of `J`, inserts a newline at the cursor
+map K i<Cr><Esc>f$
+
+" `,f` to open fuzzy file finder, `,F` to open fuzzy file search
+map <Leader>f :Files<CR>
+map <Leader>F :Find<CR>
+
+let g:miniBufExplShowBufNumbers=1
+
+" Map `<leader>[0-9]` to open buffer `[0-9]`
+nmap <Leader>1 :b1<CR>
+nmap <Leader>2 :b2<CR>
+nmap <Leader>3 :b3<CR>
+nmap <Leader>4 :b4<CR>
+nmap <Leader>5 :b5<CR>
+nmap <Leader>6 :b6<CR>
+nmap <Leader>7 :b7<CR>
+nmap <Leader>8 :b8<CR>
+nmap <Leader>9 :b9<CR>
+
+nmap <Leader>w <Plug>(easymotion-W)
+nmap <Leader>b <Plug>(easymotion-B)
+
+" Map `<leader>x` to close the current buffer
+nmap <Leader>x :bd<CR>
+
+nmap <Leader>t :RustTest<CR>
+nmap <F5> :RustTest!<CR>
+
+" Change default search to incremental search
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Prepend z before search command to invoke easymotion incremental search
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
+
+" Reload .vimrc with `,.`
+map <Leader>. :source ~/.vimrc<CR>
+
+" Open NERDTree with `,n`
+map <Leader>n :NERDTreeToggle<CR>
 
 set omnifunc=syntaxcomplete#Complete
-
-:iabbrev <// </<C-X><C-O>
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
