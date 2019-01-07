@@ -1,23 +1,40 @@
 set fish_greeting ""
 setenv EDITOR vim
-setenv SSH_ENV $HOME/.ssh/environment
-setenv NPM_CONFIG_PREFIX ~/.npm-global
 
-set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --iglob "!.git/*" --iglob "!node_modules/*" --iglob "!bower_components/*"'
-set theme_color_scheme solarized-light
+set -gx PATH /usr/local/bin (ruby -e 'print Gem.user_dir')/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
 
-function nvm
-     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+# Enable for hi-dpi support
+#setenv GDK_SCALE 2
+#set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
+#set -gx QT_QPA_PLATFORMTHEME qt5ct
+
+set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
+
+function key_bindings
+    fish_vi_key_bindings
+    # Use `tn` to exit insert mode.
+    bind -M insert -m default tn force-repaint
 end
 
-function start_agent                                                                                                                                                                    
+set -g fish_key_bindings key_bindings
+
+set -g color_dir_str white
+set -g color_vi_mode_indicator white
+
+function su
+    /bin/su --shell=/usr/bin/fish $argv
+end
+
+set -gx SSH_ENV $HOME/.ssh_environment
+
+function start_agent
     ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
     chmod 600 $SSH_ENV 
     . $SSH_ENV > /dev/null
     ssh-add
 end
 
-function test_identities                                                                                                                                                                
+function test_identities
     ssh-add -l | grep "The agent has no identities" > /dev/null
     if [ $status -eq 0 ]
         ssh-add
@@ -27,25 +44,19 @@ function test_identities
     end
 end
 
-if [ -n "$SSH_AGENT_PID" ] 
+if [ -n "$SSH_AGENT_PID" ]
     ps -ef | grep $SSH_AGENT_PID | grep ssh-agent > /dev/null
     if [ $status -eq 0 ]
         test_identities
-    end  
+    end
 else
     if [ -f $SSH_ENV ]
-        . $SSH_ENV > /dev/null
-    end  
+        source $SSH_ENV > /dev/null
+    end
     ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep ssh-agent > /dev/null
     if [ $status -eq 0 ]
         test_identities
-    else 
+    else
         start_agent
-    end  
-end
-
-if status --is-login
-	if test -z "$DISPLAY" -a $XDG_VTNR = 1
-		exec startx -- -keeptty
-	end
+    end
 end
