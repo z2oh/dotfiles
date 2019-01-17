@@ -6,7 +6,7 @@
 #define _COLEMAK 0
 #define _QWERTY 1
 #define _RAISE 2
-#define _LOWER 2
+#define _LOWER 3
 
 enum keycodes {
   COLEMAK = SAFE_RANGE,
