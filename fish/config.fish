@@ -14,6 +14,11 @@ function key_bindings
     fish_vi_key_bindings
     # Use `tn` to exit insert mode.
     bind -M insert -m default tn force-repaint
+    bind -M default r backward-char
+    bind -M default t forward-char
+    bind -M default f up-line
+    bind -M default s down-line
+    bind -M default l forward-jump
 end
 
 set -g fish_key_bindings key_bindings
