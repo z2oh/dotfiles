@@ -1,0 +1,3 @@
+#!/usr/local/bin/fish
+brew services restart chunkwm
+brew services restart skhd
