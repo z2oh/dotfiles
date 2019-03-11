@@ -191,6 +191,7 @@ noremap l t
 noremap h r
 
 nmap ; :LspDefinition<CR>
+nmap <Leader>h :LspHover<CR>
 
 " Opposite of `J`, inserts a newline at the cursor
 map K i<Cr><Esc>f$
