@@ -203,15 +203,15 @@ map <Leader>F :Find<CR>
 let g:miniBufExplShowBufNumbers=1
 
 " Map `<leader>[0-9]` to open buffer `[0-9]`
-nmap <Leader>1 :b1<CR>
-nmap <Leader>2 :b2<CR>
-nmap <Leader>3 :b3<CR>
-nmap <Leader>4 :b4<CR>
-nmap <Leader>5 :b5<CR>
-nmap <Leader>6 :b6<CR>
-nmap <Leader>7 :b7<CR>
-nmap <Leader>8 :b8<CR>
-nmap <Leader>9 :b9<CR>
+nmap <Leader>1 :b!1<CR>
+nmap <Leader>2 :b!2<CR>
+nmap <Leader>3 :b!3<CR>
+nmap <Leader>4 :b!4<CR>
+nmap <Leader>5 :b!5<CR>
+nmap <Leader>6 :b!6<CR>
+nmap <Leader>7 :b!7<CR>
+nmap <Leader>8 :b!8<CR>
+nmap <Leader>9 :b!9<CR>
 
 nmap <Leader>w <Plug>(easymotion-W)
 nmap <Leader>b <Plug>(easymotion-B)
