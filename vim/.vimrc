@@ -25,6 +25,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'rust-lang/rust.vim'
 " Fish script language plugin
 Plug 'dag/vim-fish'
+" Syntax highlighting for llvm files (*.ll)
+Plug 'andrewmacp/llvm.vim'
 
 " Minor features ===============================================================
 " Git/mercurial information in the gutter
@@ -112,6 +114,10 @@ let g:airline_extensions = []
 
 " Disables rust.vim's line wrapping at 99 columns
 let g:rust_recommended_style = 0
+
+" Disable spellchecking for llvm files, since keywords are highlighted as misspells in source
+autocmd BufRead,BufNewFile *.ll set nospell
+
 " Enable syntax highlighting and enable syntax checking for entire buffers
 " when they are opened
 syntax enable
