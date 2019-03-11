@@ -43,7 +43,6 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'editorconfig/editorconfig-vim'
 " Displays indentation guides
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
 " Causes word motions to work with snake_case and CamelCase
 Plug 'chaoren/vim-wordmotion'
 " Allows for easy commenting
