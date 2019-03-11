@@ -56,6 +56,11 @@ Plug 'junegunn/vim-easy-align'
 " Adds symbol highlighting on <leader>m
 Plug 'inkarkat/vim-mark'
 " Adds icons to various plugins, including NERDTree
+Plug 'ryanoasis/vim-devicons'
+" Provides colors for NERDTree icons
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" A fancy start screen for vim
+Plug 'mhinz/vim-startify'
 
 " Themes =======================================================================
 Plug 'NLKNguyen/papercolor-theme'
@@ -87,12 +92,19 @@ set nomagic
 
 set termguicolors
 
-" Open NERDTree automatically if vim is started without a file.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close Vim if the only open window is a NERDTree window.
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Close Vim if the only open window is a NERDTree window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Adds folder icons to folders in NERDTree.
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+" Only colors some filetypes to reduce lag of running many regexes.
+let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+let g:NERDTreeDisableExactMatchHighlight = 1
+let g:NERDTreeDisablePatternMatchHighlight = 1
+let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'c++', 'rs', 'scala']
+
+let NERDTreeQuitOnOpen = 1
 
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
