@@ -51,6 +51,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vim-scripts/ShowTrailingWhitespace'
 " Deletes trailing whitespace
 Plug 'vim-scripts/DeleteTrailingWhitespace'
+" Aligns text fragments on symbols
+Plug 'junegunn/vim-easy-align'
 " Adds symbol highlighting on <leader>m
 Plug 'inkarkat/vim-mark'
 " Adds icons to various plugins, including NERDTree
@@ -211,6 +213,9 @@ map <Leader>k <Plug>MarkClear
 
 " Open NERDTree with `,n`
 map <Leader>n :NERDTreeToggle<CR>
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+xmap ga <Plug>(EasyAlign)
 
 set omnifunc=syntaxcomplete#Complete
 
