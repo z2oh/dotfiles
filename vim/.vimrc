@@ -1,5 +1,9 @@
 call plug#begin('~/.vim/plugged')
 
+" Vim libraries ===============================================================
+" Used by `inkarkat/vim-mark`
+Plug 'inkarkat/vim-ingo-library'
+
 " Major features ===============================================================
 " Fuzzy file finder
 Plug 'junegunn/fzf.vim'
@@ -44,6 +48,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'chaoren/vim-wordmotion'
 " Allows for easy commenting
 Plug 'scrooloose/nerdcommenter'
+Plug 'inkarkat/vim-mark'
+" Adds icons to various plugins, including NERDTree
 
 " Themes =======================================================================
 Plug 'NLKNguyen/papercolor-theme'
@@ -190,6 +196,10 @@ map zg/ <Plug>(incsearch-easymotion-stay)
 
 " Reload .vimrc with `,.`
 map <Leader>. :source ~/.vimrc<CR>
+
+" Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
+" toggle below.
+map <Leader>k <Plug>MarkClear
 
 " Open NERDTree with `,n`
 map <Leader>n :NERDTreeToggle<CR>
