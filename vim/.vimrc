@@ -123,6 +123,11 @@ set colorcolumn=80,100,120
 set cursorline
 set backspace=indent,eol,start
 set textwidth=120
+" Always keep 7 lines of buffer between cursor line and top/bottom of window
+" when scrolling
+set scrolloff=7
+set ttyfast
+set lazyredraw
 
 " Automatically remove trailing whitespace at the end of lines
 " N.B. If we save after undoing, we get an error because of undojoin. The
@@ -174,6 +179,10 @@ noremap f gk
 noremap s gj
 noremap r h
 noremap t l
+
+" Bind Shift+f and Shift+s to move to top of bottom of window
+nnoremap <S-f> <S-h>
+nnoremap <S-s> <S-l>
 
 " Use l as a mapping for 'till
 noremap l t
