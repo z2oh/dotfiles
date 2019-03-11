@@ -88,7 +88,6 @@ set completeopt-=preview
 let g:asyncomplete_remove_duplicates = 1
 
 let g:EasyMotion_smartcase = 4
-set nomagic
 
 set termguicolors
 
@@ -128,6 +127,8 @@ set textwidth=120
 " N.B. If we save after undoing, we get an error because of undojoin. The
 " try/catch block will silence that error.
 autocmd BufWritePre * :try | undojoin | DeleteTrailingWhitespace | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
+
+set nomagic
 set ignorecase
 set smartcase
 set spell
