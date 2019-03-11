@@ -47,6 +47,11 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'chaoren/vim-wordmotion'
 " Allows for easy commenting
 Plug 'scrooloose/nerdcommenter'
+" Highlights trailing whitespace
+Plug 'vim-scripts/ShowTrailingWhitespace'
+" Deletes trailing whitespace
+Plug 'vim-scripts/DeleteTrailingWhitespace'
+" Adds symbol highlighting on <leader>m
 Plug 'inkarkat/vim-mark'
 " Adds icons to various plugins, including NERDTree
 
@@ -62,7 +67,7 @@ if executable('rls')
         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
         \ 'whitelist': ['rust'],
         \ })
-endif 
+endif
 
 " Set tab to perform autocomplete
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -105,6 +110,10 @@ set cursorline
 set backspace=indent,eol,start
 set textwidth=120
 
+" Automatically remove trailing whitespace at the end of lines
+" N.B. If we save after undoing, we get an error because of undojoin. The
+" try/catch block will silence that error.
+autocmd BufWritePre * :try | undojoin | DeleteTrailingWhitespace | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
 set ignorecase
 set smartcase
 set spell
@@ -134,7 +143,7 @@ let g:indent_guides_auto_colors=0
 let mapleader = ","
 
 " Unbind `s` and `f` from NERDTree, as these keys are mapped to gk and gj
-" respectively. 
+" respectively.
 let NERDTreeMapOpenVSplit='\s'
 let NERDTreeMapToggleFilters='\f'
 
