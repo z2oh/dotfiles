@@ -110,6 +110,8 @@ let g:airline_section_warning = ''
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = []
 
+" Disables rust.vim's line wrapping at 99 columns
+let g:rust_recommended_style = 0
 " Enable syntax highlighting and enable syntax checking for entire buffers
 " when they are opened
 syntax enable
@@ -126,6 +128,10 @@ set textwidth=120
 " N.B. If we save after undoing, we get an error because of undojoin. The
 " try/catch block will silence that error.
 autocmd BufWritePre * :try | undojoin | DeleteTrailingWhitespace | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
+
+" Remove line wrapping for markdown and txt files.
+autocmd BufEnter *.md :set textwidth=0
+autocmd BufEnter *.txt :set textwidth=0
 
 set nomagic
 set ignorecase
