@@ -107,8 +107,6 @@ let NERDTreeQuitOnOpen = 1
 
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_conceal_function = "ƒ"
 let g:airline_powerline_fonts = 1
 
 " Enable syntax highlighting and enable syntax checking for entire buffers
