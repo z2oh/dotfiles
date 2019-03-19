@@ -227,27 +227,27 @@ nnoremap <Leader>t :RustTest<CR>
 nnoremap <F5> :RustTest!<CR>
 
 " Change default search to incremental search
-noremap /  <Plug>(incsearch-forward)
-noremap ?  <Plug>(incsearch-backward)
-noremap g/ <Plug>(incsearch-stay)
+nmap /  <Plug>(incsearch-forward)
+nmap ?  <Plug>(incsearch-backward)
+nmap g/ <Plug>(incsearch-stay)
 
 " Prepend z before search command to invoke easymotion incremental search
-noremap z/ <Plug>(incsearch-easymotion-/)
-noremap z? <Plug>(incsearch-easymotion-?)
-noremap zg/ <Plug>(incsearch-easymotion-stay)
+nmap z/ <Plug>(incsearch-easymotion-/)
+nmap z? <Plug>(incsearch-easymotion-?)
+nmap zg/ <Plug>(incsearch-easymotion-stay)
 
 " Reload .vimrc with `,.`
 noremap <Leader>. :source ~/.vimrc<CR>
 
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
-noremap <Leader>k <Plug>MarkClear
+nmap <Leader>k <Plug>MarkClear
 
 " Open NERDTree with `,n`
 noremap <Leader>n :NERDTreeToggle<CR>
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-xnoremap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 set omnifunc=syntaxcomplete#Complete
 
