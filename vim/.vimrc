@@ -237,7 +237,9 @@ nmap z? <Plug>(incsearch-easymotion-?)
 nmap zg/ <Plug>(incsearch-easymotion-stay)
 
 " Reload .vimrc with `,.`
-noremap <Leader>. :source ~/.vimrc<CR>
+noremap <Leader>. :source $MYVIMRC<CR>
+" Open .vimrc with `,ev`
+noremap <Leader>ev :vsplit $MYVIMRC<CR>
 
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
