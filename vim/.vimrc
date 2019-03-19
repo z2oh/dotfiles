@@ -178,7 +178,7 @@ let mapleader = ","
 let NERDTreeMapOpenVSplit='\s'
 let NERDTreeMapToggleFilters='\f'
 
-imap tn <Esc>
+inoremap tn <Esc>
 
 " Use fsrt to move around files (esdf on QWERTY)
 noremap f gk
@@ -187,8 +187,8 @@ noremap r h
 noremap t l
 
 " Bind Shift+f and Shift+s to move to top of bottom of window
-nnoremap <S-f> <S-h>
-nnoremap <S-s> <S-l>
+noremap <S-f> <S-h>
+noremap <S-s> <S-l>
 
 " Use l as a mapping for 'till
 noremap l t
@@ -196,60 +196,58 @@ noremap l t
 " Use h as a mapping for replace
 noremap h r
 
-nmap ; :LspDefinition<CR>
-nmap <Leader>h :LspHover<CR>
+nnoremap ; :LspDefinition<CR>
+nnoremap <Leader>h :LspHover<CR>
 
 " Opposite of `J`, inserts a newline at the cursor
-map K i<Cr><Esc>f$
+noremap K i<Cr><Esc>f$
 
 " `,f` to open fuzzy file finder, `,F` to open fuzzy file search
-map <Leader>f :Files<CR>
-map <Leader>F :Find<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>F :Find<CR>
 
 let g:miniBufExplShowBufNumbers=1
 
 " Map `<leader>[0-9]` to open buffer `[0-9]`
-nmap <Leader>1 :b!1<CR>
-nmap <Leader>2 :b!2<CR>
-nmap <Leader>3 :b!3<CR>
-nmap <Leader>4 :b!4<CR>
-nmap <Leader>5 :b!5<CR>
-nmap <Leader>6 :b!6<CR>
-nmap <Leader>7 :b!7<CR>
-nmap <Leader>8 :b!8<CR>
-nmap <Leader>9 :b!9<CR>
-
-nmap <Leader>w <Plug>(easymotion-W)
-nmap <Leader>b <Plug>(easymotion-B)
+nnoremap <Leader>1 :b!1<CR>
+nnoremap <Leader>2 :b!2<CR>
+nnoremap <Leader>3 :b!3<CR>
+nnoremap <Leader>4 :b!4<CR>
+nnoremap <Leader>5 :b!5<CR>
+nnoremap <Leader>6 :b!6<CR>
+nnoremap <Leader>7 :b!7<CR>
+nnoremap <Leader>8 :b!8<CR>
+nnoremap <Leader>9 :b!9<CR>
 
 " Map `<leader>x` to close the current buffer
-nmap <Leader>x :bd<CR>
+nnoremap <Leader>x :bd<CR>
 
-nmap <Leader>t :RustTest<CR>
-nmap <F5> :RustTest!<CR>
+" TODO: Generalize this to run tests for other languages.
+nnoremap <Leader>t :RustTest<CR>
+nnoremap <F5> :RustTest!<CR>
 
 " Change default search to incremental search
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+noremap /  <Plug>(incsearch-forward)
+noremap ?  <Plug>(incsearch-backward)
+noremap g/ <Plug>(incsearch-stay)
 
 " Prepend z before search command to invoke easymotion incremental search
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map zg/ <Plug>(incsearch-easymotion-stay)
+noremap z/ <Plug>(incsearch-easymotion-/)
+noremap z? <Plug>(incsearch-easymotion-?)
+noremap zg/ <Plug>(incsearch-easymotion-stay)
 
 " Reload .vimrc with `,.`
-map <Leader>. :source ~/.vimrc<CR>
+noremap <Leader>. :source ~/.vimrc<CR>
 
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
-map <Leader>k <Plug>MarkClear
+noremap <Leader>k <Plug>MarkClear
 
 " Open NERDTree with `,n`
-map <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<CR>
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-xmap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
 
 set omnifunc=syntaxcomplete#Complete
 
