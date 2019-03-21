@@ -1,6 +1,6 @@
-" *****************************************************************************
+" ******************************************************************************
 " *    PLUGINS
-" *****************************************************************************
+" ******************************************************************************
 
 call plug#begin('~/.vim/plugged')
 
@@ -84,7 +84,7 @@ call plug#end()
 
 " Settings =====================================================================
 
-" Theming settings ------------------------------------------------------------
+" Theming settings -------------------------------------------------------------
 
 " Enable full color support for terminal vim.
 set termguicolors
@@ -113,7 +113,7 @@ let g:airline_section_warning = ''
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = []
 
-" Basic Vim settings ----------------------------------------------------------
+" Basic Vim settings -----------------------------------------------------------
 
 " Display the cursorline's absolute number, and every other line number relative
 " to the cursor line.
@@ -194,7 +194,7 @@ set clipboard=unnamedplus
 " Enable autoselect; selections are automatically placed in the clipboard.
 set clipboard+=autoselect
 
-" Plugin settings -------------------------------------------------------------
+" Plugin settings --------------------------------------------------------------
 
 " Remove duplicate entires in completion menu.
 let g:asyncomplete_remove_duplicates = 1
@@ -262,7 +262,7 @@ augroup highlight_syntax
     autocmd BufEnter * :syntax sync fromstart
 augroup END
 
-" Filetype autocommands -------------------------------------------------------
+" Filetype autocommands --------------------------------------------------------
 
 " Group of autocommands to run for LLVM files.
 augroup filetype_llvm
@@ -299,7 +299,7 @@ augroup end
 
 " Key mappings =================================================================
 
-" Core mappings ---------------------------------------------------------------
+" Core mappings ----------------------------------------------------------------
 
 " Use `,` for leader.
 let mapleader = ","
@@ -307,7 +307,7 @@ let mapleader = ","
 " Use `tn` for <Esc>.
 inoremap tn <Esc>
 
-" Motions ---------------------------------------------------------------------
+" Motions ----------------------------------------------------------------------
 
 " Use fsrt to move around files (this is esdf on QWERTY).
 " N.B. gk and gj are used to move between lines on screen rather than actual
@@ -384,7 +384,7 @@ noremap <Leader>n :NERDTreeToggle<CR>
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 xmap ga <Plug>(EasyAlign)
 
-" Additional functions ========================================================
+" Additional functions =========================================================
 
 " Uses ripgrep to drive fzf.
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number
