@@ -279,7 +279,7 @@ augroup filetype_md
 augroup END
 
 " Group of autocommands to run for .txt files.
-augroup filetype_md
+augroup filetype_txt
     " Remove line wrapping.
     autocmd BufEnter *.txt :set textwidth=0
 augroup END
