@@ -285,7 +285,7 @@ augroup filetype_md
 augroup END
 
 " Autocommands to run for Rust file.
-augroup rust_mappings
+augroup filetype_rust
     autocmd!
     " Map `;` to query RLS for 'GOTO definition'.
     autocmd FileType rust nnoremap ; :LspDefinition<CR>
