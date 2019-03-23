@@ -1,0 +1,1 @@
+ACTION=="add", ATTRS{idVendor}=="feed", ATTRS{idProduct}=="6060", RUN+="/home/jaday/bin/kbd_udev", OWNER="jaday"

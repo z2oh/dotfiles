@@ -1,0 +1,12 @@
+#!/bin/bash
+sleep 1
+DISPLAY=":0.0"
+HOME=/home/jaday/
+XAUTHORITY=$HOME/.Xauthority
+export DISPLAY XAUTHORITY HOME
+
+# Set the keyboard key repeat and delete delay to match OSx's fastest setting.
+# 225 ms initial delay to begin repetition, repeat rate at 33 hz
+xset r rate 225 33
+setxkbmap us -variant colemak
+setxkbmap -option compose:ralt
