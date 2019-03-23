@@ -1,0 +1,12 @@
+compton &
+redshift &
+
+/home/jaday/bin/switch_to_laptop_layout.sh &
+
+# Set up the built in laptop keyboard.
+setxkbmap -option compose:ralt
+setxkbmap us -variant colemak
+
+# Set the keyboard key repeat and delete delay to match OSx's fastest setting.
+# 225 ms initial delay to begin repetition, repeat rate at 33 hz
+xset r rate 255 33
