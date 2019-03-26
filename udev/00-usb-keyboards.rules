@@ -1,1 +1,2 @@
-ACTION=="add", ATTRS{idVendor}=="feed", ATTRS{idProduct}=="6060", RUN+="/home/jaday/bin/kbd_udev", OWNER="jaday"
+ACTION=="add", ATTRS{idVendor}=="feed", ATTRS{idProduct}=="6060", RUN+="/home/jaday/bin/kbd_kbd75_rev2_udev", OWNER="jaday"
+ACTION=="add", ATTRS{idVendor}=="feed", ATTRS{idProduct}=="6061", RUN+="/home/jaday/bin/kbd_preonic_rev3_udev", OWNER="jaday"
