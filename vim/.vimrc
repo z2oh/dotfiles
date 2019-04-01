@@ -16,8 +16,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-airline/vim-airline'
 " Directory tree/project explorer.
 Plug 'scrooloose/nerdtree'
-" Buffer toolbar.
-Plug 'fholgado/minibufexpl.vim'
 
 " Language support =============================================================
 " Support for language server and async code completion.
@@ -106,12 +104,6 @@ let g:NERDTreeSyntaxDisableDefaultExtensions = 1
 let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
 let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'c++', 'rs', 'scala']
-
-" Disable error and warning sections of airline and enable powerline fonts.
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-let g:airline_powerline_fonts = 1
-let g:airline_extensions = []
 
 " Basic Vim settings -----------------------------------------------------------
 
@@ -217,8 +209,22 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 
-" Show buffer numbers for buffer explorer.
-let g:miniBufExplShowBufNumbers=1
+" Include airline's tabline extension.
+let g:airline_extensions = ['tabline']
+
+" Show buffers in the airline tabline.
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+
+" Number the tabline buffers and enable buffer switch mappings.
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+" Use the 'unique_tail' formatter for the buffer list.
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" Enable powerline fonts for airline.
+let g:airline_powerline_fonts = 1
+
 
 " Autocommands =================================================================
 "
@@ -326,16 +332,20 @@ noremap l t
 
 " Buffer management ------------------------------------------------------------
 
-" Map `<leader>[0-9]` to open buffer `[0-9]`
-nnoremap <Leader>1 :b!1<CR>
-nnoremap <Leader>2 :b!2<CR>
-nnoremap <Leader>3 :b!3<CR>
-nnoremap <Leader>4 :b!4<CR>
-nnoremap <Leader>5 :b!5<CR>
-nnoremap <Leader>6 :b!6<CR>
-nnoremap <Leader>7 :b!7<CR>
-nnoremap <Leader>8 :b!8<CR>
-nnoremap <Leader>9 :b!9<CR>
+nnoremap <Leader>b :Buffers<CR>
+
+" Map `<leader>[1-9]` to open buffer `[1-9]`
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
 
 " Map `<leader>x` to close the current buffer
 nnoremap <Leader>x :bd<CR>
