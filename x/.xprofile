@@ -10,3 +10,6 @@ setxkbmap us -variant colemak
 # Set the keyboard key repeat and delete delay to match OSx's fastest setting.
 # 225 ms initial delay to begin repetition, repeat rate at 33 hz
 xset r rate 255 33
+
+# Turn off mouse acceleration.
+xset m 0 0
