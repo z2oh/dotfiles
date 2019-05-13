@@ -1,12 +1,12 @@
 set fish_greeting ""
 setenv EDITOR vim
 
-set -gx PATH /usr/local/bin (ruby -e 'print Gem.user_dir')/bin $HOME/.local/bin $HOME/.cargo/bin $PATH
+set -gx PATH /usr/local/bin (ruby -e 'print Gem.user_dir')/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/bin $PATH
 
 # Enable for hi-dpi support
-#setenv GDK_SCALE 2
-#set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
-#set -gx QT_QPA_PLATFORMTHEME qt5ct
+setenv GDK_SCALE 2
+set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
+set -gx QT_QPA_PLATFORMTHEME qt5ct
 
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
@@ -34,7 +34,7 @@ set -gx SSH_ENV $HOME/.ssh_environment
 
 function start_agent
     ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
-    chmod 600 $SSH_ENV 
+    chmod 600 $SSH_ENV
     . $SSH_ENV > /dev/null
     ssh-add
 end

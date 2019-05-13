@@ -10,3 +10,6 @@ xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 3840x2160 --pos 0x
 setxkbmap us -variant colemak
 
 nitrogen --restore
+
+# Start polybar
+sh /home/jaday/bin/polybar_xps.sh

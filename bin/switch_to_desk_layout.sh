@@ -18,3 +18,6 @@ xrandr --output VIRTUAL1 --off --output eDP1 --off --output DP1 --off --output H
 
 # Restore the background image.
 nitrogen --restore
+
+# Start polybar
+sh /home/jaday/bin/polybar_hdmi.sh
