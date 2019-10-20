@@ -18,11 +18,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 
 " Language support =============================================================
-" Support for language server and async code completion.
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Rust language plugin.
 Plug 'rust-lang/rust.vim'
 " Fish script language plugin.
@@ -65,8 +60,6 @@ Plug 'inkarkat/vim-mark'
 Plug 'ryanoasis/vim-devicons'
 " Provides colors for NERDTree icons.
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" A fancy start screen for vim.
-Plug 'mhinz/vim-startify'
 " Enables simple reordering of delimited items (function args).
 Plug 'machakann/vim-swap'
 
@@ -186,6 +179,9 @@ set clipboard=unnamedplus
 " Enable autoselect; selections are automatically placed in the clipboard.
 set clipboard+=autoselect
 
+" Change the cursor hover update time from the default of 4000 ms to 300ms.
+set updatetime=300
+
 " Plugin settings --------------------------------------------------------------
 
 " Remove duplicate entires in completion menu.
@@ -224,6 +220,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Enable powerline fonts for airline.
 let g:airline_powerline_fonts = 1
+
+" Add period, quotation mark, and dash to wordmotion space character list.
+let g:wordmotion_spaces = '_-."'
 
 
 " Autocommands =================================================================
@@ -270,6 +269,11 @@ augroup END
 
 " Filetype autocommands --------------------------------------------------------
 
+augroup filetype_scala
+    autocmd!
+    autocmd FileType scala :set textwidth=120
+augroup END
+
 " Group of autocommands to run for LLVM files.
 augroup filetype_llvm
     autocmd!
@@ -294,7 +298,7 @@ augroup END
 augroup filetype_rust
     autocmd!
     " Map `;` to query RLS for 'GOTO definition'.
-    autocmd FileType rust nnoremap ; :LspDefinition<CR>
+    " TODO
     " Map `,h` to open the hover information from RLS in a window.
     autocmd FileType rust nnoremap <Leader>h :LspHover<CR>
     " Execute the current test under the cursor.
@@ -312,6 +316,7 @@ let mapleader = ","
 
 " Use `tn` for <Esc>.
 inoremap tn <Esc>
+vnoremap tn <Esc>
 
 " Motions ----------------------------------------------------------------------
 
@@ -394,10 +399,15 @@ noremap <Leader>n :NERDTreeToggle<CR>
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 xmap ga <Plug>(EasyAlign)
 
+" Add mappings to select function parameters (or any swappable text objects).
+omap i, <Plug>(swap-textobject-i)
+xmap i, <Plug>(swap-textobject-i)
+omap a, <Plug>(swap-textobject-a)
+xmap a, <Plug>(swap-textobject-a)
+
 " Additional functions =========================================================
 
 " Uses ripgrep to drive fzf.
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number
     \ --no-heading --fixed-strings --ignore-case --hidden --follow --glob
     \ "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
