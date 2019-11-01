@@ -364,6 +364,8 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 
 " Map `<leader>x` to close the current buffer
 nnoremap <Leader>x :bd<CR>
+" Map `<leader><Esc>` to close ALL buffers
+nnoremap <Leader><Esc> :%bdelete<CR>
 
 " Utility mappings -------------------------------------------------------------
 "
