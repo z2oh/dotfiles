@@ -16,8 +16,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-airline/vim-airline'
 " Directory tree/project explorer.
 Plug 'scrooloose/nerdtree'
+" Deoplete asynchronous completion engine.
+Plug 'Shougo/deoplete.nvim'
 
 " Language support =============================================================
+" LSP client.
+Plug 'dense-analysis/ale'
 " Rust language plugin.
 Plug 'rust-lang/rust.vim'
 " Fish script language plugin.
@@ -62,6 +66,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Enables simple reordering of delimited items (function args).
 Plug 'machakann/vim-swap'
+" Support libs for nvim plugins.
+Plug 'roxma/nvim-yarp' " Supporting deoplete.
+Plug 'roxma/vim-hug-neovim-rpc' " Supporting deoplete.
 
 " Themes =======================================================================
 Plug 'NLKNguyen/papercolor-theme'
@@ -184,6 +191,13 @@ set updatetime=300
 
 " Plugin settings --------------------------------------------------------------
 
+" Enable deoplete.
+let g:deoplete#enable_at_startup = 1
+
+" ALE
+let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_set_balloons=1
+
 " Remove duplicate entires in completion menu.
 let g:asyncomplete_remove_duplicates = 1
 
@@ -297,10 +311,6 @@ augroup END
 " Autocommands to run for Rust file.
 augroup filetype_rust
     autocmd!
-    " Map `;` to query RLS for 'GOTO definition'.
-    " TODO
-    " Map `,h` to open the hover information from RLS in a window.
-    autocmd FileType rust nnoremap <Leader>h :LspHover<CR>
     " Execute the current test under the cursor.
     autocmd FileType rust nnoremap <Leader>t :RustTest<CR>
     " Use F5 to execute all tests (`cargo test` in root).
@@ -372,6 +382,13 @@ noremap K i<Cr><Esc>f$
 noremap <Leader>. :source $MYVIMRC<CR>
 " Open ~/.vimrc with `,ev`
 noremap <Leader>ev :vsplit $MYVIMRC<CR>
+
+" LSP Mappings.
+" Map `;` to query RLS for 'GOTO definition'.
+nnoremap ; :ALEGoToDefinition<CR>
+nnoremap <Leader>h :ALEHover<CR>
+nnoremap <silent> > :ALENextWrap<CR>
+nnoremap <silent> < :ALEPreviousWrap<CR>
 
 " Plugin Mappings --------------------------------------------------------------
 
