@@ -1,12 +1,18 @@
+# Disable the default fish greeting.
 set fish_greeting ""
-setenv EDITOR vim
 
-set -gx PATH /usr/local/bin (ruby -e 'print Gem.user_dir')/bin $HOME/.local/bin $HOME/.cargo/bin $HOME/bin $PATH
+# Set default editor to vim.
+set -x EDITOR vim
+set -x VISUAL vim
 
-# Enable for hi-dpi support
-setenv GDK_SCALE 2
-set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
-set -gx QT_QPA_PLATFORMTHEME qt5ct
+# The `p` flag means prepend, the `g` flag means global, and the `x` flag means
+# export (as environment variable).
+set -pgx PATH $HOME/.fnl/bin
+set -pgx PATH $HOME/aros/buildtools/mac-x64/rust/bin/
+set -pgx PATH $HOME/.yarn/bin
+set -pgx PATH $HOME
+set -pgx PATH $HOME/bin
+set -pgx PATH $HOME/.cargo/bin
 
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 
@@ -14,6 +20,10 @@ function key_bindings
     fish_vi_key_bindings
     # Use `tn` to exit insert mode.
     bind -M insert -m default tn force-repaint
+    # Home moves to the start of the current line.
+    bind -M insert -k home beginning-of-buffer
+    bind -M default -k home beginning-of-buffer
+    # Remap keys to match custom vim keys.
     bind -M default r backward-char
     bind -M default t forward-char
     bind -M default f up-line
@@ -23,45 +33,14 @@ end
 
 set -g fish_key_bindings key_bindings
 
+# Set the color of the directory prompt
 set -g color_dir_str white
+# Set the color of the text in the vi mode prompt.
 set -g color_vi_mode_indicator white
 
-function su
-    /bin/su --shell=/usr/bin/fish $argv
-end
-
-set -gx SSH_ENV $HOME/.ssh_environment
-
-function start_agent
-    ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
-    chmod 600 $SSH_ENV
-    . $SSH_ENV > /dev/null
-    ssh-add
-end
-
-function test_identities
-    ssh-add -l | grep "The agent has no identities" > /dev/null
-    if [ $status -eq 0 ]
-        ssh-add
-        if [ $status -eq 2 ]
-            start_agent
-        end
-    end
-end
-
-if [ -n "$SSH_AGENT_PID" ]
-    ps -ef | grep $SSH_AGENT_PID | grep ssh-agent > /dev/null
-    if [ $status -eq 0 ]
-        test_identities
-    end
-else
-    if [ -f $SSH_ENV ]
-        source $SSH_ENV > /dev/null
-    end
-    ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep ssh-agent > /dev/null
-    if [ $status -eq 0 ]
-        test_identities
-    else
-        start_agent
-    end
-end
+# These monorepos are huge and querying the source control system takes seconds.
+# Because of this, we disable the automatic informational prompt so that we do
+# not need to wait between every command execution.
+set -pg scm_prompt_blacklist "/Users/jaday/aros"
+set -pg scm_prompt_blacklist "/Users/jaday/fbsource"
+set -pg scm_prompt_blacklist "/Users/jaday/ovrsource"
