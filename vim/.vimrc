@@ -198,9 +198,6 @@ let g:deoplete#enable_at_startup = 1
 let g:ale_linters = {'rust': ['analyzer']}
 let g:ale_set_balloons=1
 
-" Remove duplicate entires in completion menu.
-let g:asyncomplete_remove_duplicates = 1
-
 " Close the NERDTree window when opening a file.
 let NERDTreeQuitOnOpen = 1
 
@@ -251,18 +248,6 @@ augroup close_NERDTree
     autocmd!
     autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") &&
         \ b:NERDTree.isTabTree()) | q | endif
-augroup END
-
-" Register language servers with vim-lsp.
-augroup register_language_servers
-    autocmd!
-    if executable('rls')
-        autocmd User lsp_setup call lsp#register_server({
-            \ 'name': 'rls',
-            \ 'cmd': {server_info->['rls']},
-            \ 'whitelist': ['rust'],
-            \ })
-    endif
 augroup END
 
 " Automatically remove trailing whitespace at the end of lines on write.
