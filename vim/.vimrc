@@ -33,7 +33,7 @@ Plug 'derekwyatt/vim-scala'
 
 " Minor features ===============================================================
 " Git/mercurial information in the gutter.
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 " Git support.
 Plug 'tpope/vim-fugitive'
 " Modify or delete surrounding tags, ([{'" for example.
@@ -66,6 +66,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Enables simple reordering of delimited items (function args).
 Plug 'machakann/vim-swap'
+" Better marks support: navigation and highlighting.
+Plug 'kshenoy/vim-signature'
 " Support libs for nvim plugins.
 Plug 'roxma/nvim-yarp' " Supporting deoplete.
 Plug 'roxma/vim-hug-neovim-rpc' " Supporting deoplete.
@@ -104,6 +106,9 @@ let g:NERDTreeSyntaxDisableDefaultExtensions = 1
 let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
 let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'c++', 'rs', 'scala']
+
+" Disable the background colors of the gutter for source control signifiers.
+let g:signify_line_highlight = 0
 
 " Basic Vim settings -----------------------------------------------------------
 
@@ -186,16 +191,16 @@ set clipboard=unnamedplus
 " Enable autoselect; selections are automatically placed in the clipboard.
 set clipboard+=autoselect
 
-" Change the cursor hover update time from the default of 4000 ms to 300ms.
-set updatetime=300
+" Change the cursor hover update time from the default of 4000 ms to 100ms.
+set updatetime=100
 
 " Plugin settings --------------------------------------------------------------
-
 " Enable deoplete.
 let g:deoplete#enable_at_startup = 1
+set completeopt=menu,noselect
 
 " ALE
-let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_linters = {'rust': ['analyzer'], 'scala': []}
 let g:ale_set_balloons=1
 
 " Close the NERDTree window when opening a file.
@@ -237,6 +242,7 @@ let g:wordmotion_spaces = '_-."'
 
 
 " Autocommands =================================================================
+
 "
 " N.B. all autocommands are wrapped in groups with `autocmd!` to prevent
 " duplicate event subscriptions on .vimrc sourcing. See
@@ -357,6 +363,9 @@ nnoremap <Leader><Esc> :%bdelete<CR>
 " Use `h` as a mapping for replace. This is because `r` is remapped to a motion.
 noremap h r
 
+" Use `dp` (delete pair) to delete a pair of grouping delimiters, e.g. {}/[]/()
+noremap dp %x<C-o>x
+
 " Map `tab` to perform autocompletions.
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -396,6 +405,9 @@ nmap zg/ <Plug>(incsearch-easymotion-stay)
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
 nmap <Leader>k <Plug>MarkClear
+nmap <Leader>` <Plug>MarkRegex
+xmap <Leader>` <Plug>MarkRegex
+omap <Leader>` <Plug>MarkRegex
 
 " Open NERDTree with `,n`
 noremap <Leader>n :NERDTreeToggle<CR>
@@ -408,6 +420,11 @@ omap i, <Plug>(swap-textobject-i)
 xmap i, <Plug>(swap-textobject-i)
 omap a, <Plug>(swap-textobject-a)
 xmap a, <Plug>(swap-textobject-a)
+
+" `,h` will toggle full line source control highlighting with signify. This is
+" useful for quickly finding changes in a file, but can be cumbersome when
+" working on a large change set.
+nnoremap <Leader>h :SignifyToggleHighlight<CR>
 
 " Additional functions =========================================================
 
