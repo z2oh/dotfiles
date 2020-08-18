@@ -7,8 +7,6 @@ set -x VISUAL vim
 
 # The `p` flag means prepend, the `g` flag means global, and the `x` flag means
 # export (as environment variable).
-set -pgx PATH $HOME/.fnl/bin
-set -pgx PATH $HOME/aros/buildtools/mac-x64/rust/bin/
 set -pgx PATH $HOME/.yarn/bin
 set -pgx PATH $HOME
 set -pgx PATH $HOME/bin
@@ -31,16 +29,11 @@ function key_bindings
     bind -M default l forward-jump
 end
 
+function fish_vi_cursor ; end
+
 set -g fish_key_bindings key_bindings
 
 # Set the color of the directory prompt
 set -g color_dir_str white
 # Set the color of the text in the vi mode prompt.
 set -g color_vi_mode_indicator white
-
-# These monorepos are huge and querying the source control system takes seconds.
-# Because of this, we disable the automatic informational prompt so that we do
-# not need to wait between every command execution.
-set -pg scm_prompt_blacklist "/Users/jaday/aros"
-set -pg scm_prompt_blacklist "/Users/jaday/fbsource"
-set -pg scm_prompt_blacklist "/Users/jaday/ovrsource"
