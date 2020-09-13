@@ -16,12 +16,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-airline/vim-airline'
 " Directory tree/project explorer.
 Plug 'scrooloose/nerdtree'
-" Deoplete asynchronous completion engine.
-Plug 'Shougo/deoplete.nvim'
 
 " Language support =============================================================
 " LSP client.
-Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Rust language plugin.
 Plug 'rust-lang/rust.vim'
 " Fish script language plugin.
@@ -68,9 +66,6 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'machakann/vim-swap'
 " Better marks support: navigation and highlighting.
 Plug 'kshenoy/vim-signature'
-" Support libs for nvim plugins.
-Plug 'roxma/nvim-yarp' " Supporting deoplete.
-Plug 'roxma/vim-hug-neovim-rpc' " Supporting deoplete.
 
 " Themes =======================================================================
 Plug 'NLKNguyen/papercolor-theme'
@@ -189,20 +184,19 @@ set expandtab
 set clipboard=unnamedplus
 
 " Enable autoselect; selections are automatically placed in the clipboard.
-set clipboard+=autoselect
+if !has('nvim')
+  set clipboard+=autoselect
+endif
 
 " Change the cursor hover update time from the default of 4000 ms to 100ms.
 set updatetime=100
 
+" Disable neovim from changing the cursor shape. Solid block forever!
+if has('nvim')
+  set guicursor=
+endif
+
 " Plugin settings --------------------------------------------------------------
-" Enable deoplete.
-let g:deoplete#enable_at_startup = 1
-set completeopt=menu,noselect
-
-" ALE
-let g:ale_linters = {'rust': ['analyzer'], 'scala': []}
-let g:ale_set_balloons=1
-
 " Close the NERDTree window when opening a file.
 let NERDTreeQuitOnOpen = 1
 
@@ -380,11 +374,8 @@ noremap <Leader>. :source $MYVIMRC<CR>
 noremap <Leader>ev :vsplit $MYVIMRC<CR>
 
 " LSP Mappings.
-" Map `;` to query RLS for 'GOTO definition'.
-nnoremap ; :ALEGoToDefinition<CR>
-nnoremap <Leader>h :ALEHover<CR>
-nnoremap <silent> > :ALENextWrap<CR>
-nnoremap <silent> < :ALEPreviousWrap<CR>
+" Map `;` to query LSP for 'GOTO definition'.
+nmap <silent> ; <Plug>(coc-definition)
 
 " Plugin Mappings --------------------------------------------------------------
 
@@ -424,7 +415,10 @@ xmap a, <Plug>(swap-textobject-a)
 " `,h` will toggle full line source control highlighting with signify. This is
 " useful for quickly finding changes in a file, but can be cumbersome when
 " working on a large change set.
-nnoremap <Leader>h :SignifyToggleHighlight<CR>
+" `,r` and `,t` will navigate to the next and previous source control hunk.
+nmap <Leader>h :SignifyToggleHighlight<CR>
+nmap <Leader>r <Plug>(signify-prev-hunk)
+nmap <Leader>t <Plug>(signify-next-hunk)
 
 " Additional functions =========================================================
 
