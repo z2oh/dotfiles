@@ -29,7 +29,7 @@ sudo pacman -Syy
 sudo pacman -Syu
 
 # Install critical packages.
-sudo pacman -S base base-devel fish ruby rustup ripgrep exa python
+sudo pacman -S base base-devel fish ruby rustup ripgrep exa python neovim
 
 # Install packages for non-headless installations.
 
