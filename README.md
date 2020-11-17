@@ -2,6 +2,10 @@
 
 Directories marked with a ❗ are important, commonly used, or otherwise critical to my system configuration.
 
+#### `bat`
+* Configuration file for [`bat`](https://github.com/sharkdp/bat) which sets the syntax highlighting color scheme to `OneHalfLight`. The default theme is designed for dark-themed terminal emulators.
+* The destination path is `~/.config/bat/config`.
+
 #### `bin`
 
 * Some binary scripts intended to be executable via `$PATH`.
