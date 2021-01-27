@@ -293,6 +293,13 @@ augroup filetype_txt
     autocmd BufEnter *.txt :set textwidth=0
 augroup END
 
+" Group of autocommands to run for .log files.
+augroup filetype_log
+    " Disable spellcheck and virtual line wrapping.
+    autocmd BufEnter *.log :set nospell
+    autocmd BufEnter *.log :set nowrap
+augroup END
+
 " Autocommands to run for Rust file.
 augroup filetype_rust
     autocmd!
