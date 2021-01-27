@@ -396,6 +396,16 @@ noremap <Leader>. :source $MYVIMRC<CR>
 " Open ~/.vimrc with `,ev`
 noremap <Leader>ev :vsplit $MYVIMRC<CR>
 
+" `,p` yanks the current buffer's file path relative to vim's cwd.
+" `,P` yanks the current buffer's absolute file path.
+if has('win32')
+  " On windows, reverse the solidus direction.
+  nmap ,p :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+  nmap ,P :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+else
+  nmap ,p :let @*=expand("%")<CR>
+  nmap ,P :let @*=expand("%:p")<CR>
+endif
 
 " Plugin Mappings --------------------------------------------------------------
 
