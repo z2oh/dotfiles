@@ -66,6 +66,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'machakann/vim-swap'
 " Better marks support: navigation and highlighting.
 Plug 'kshenoy/vim-signature'
+" Symbol/tag viewer.
+Plug 'liuchengxu/vista.vim'
 
 " Themes =======================================================================
 Plug 'NLKNguyen/papercolor-theme'
@@ -234,6 +236,20 @@ let g:airline_powerline_fonts = 1
 " Add period, quotation mark, and dash to wordmotion space character list.
 let g:wordmotion_spaces = '_-."'
 
+" Use coc as the default vista executive (from which to enumerate symbols).
+let g:vista_default_executive = 'coc'
+
+" Enable fancy icons, since a patched Nerd font is in use.
+let g:vista#renderer#enable_icon = 1
+
+" Increase the default sidebar width from 30.
+let g:vista_sidebar_width = 50
+
+" Hide constants and variables to increase SNR.
+let g:vista_ignore_kinds = [ 'Constant', 'Variable' ]
+
+" Close the window when jumping to a symbol.
+let g:vista_close_on_jump = 1
 
 " Autocommands =================================================================
 
@@ -427,9 +443,12 @@ nmap <Leader>h :SignifyToggleHighlight<CR>
 nmap <Leader>r <Plug>(signify-prev-hunk)
 nmap <Leader>t <Plug>(signify-next-hunk)
 
+nmap <silent> <F2> :Vista!!<CR>
+
 " Additional functions =========================================================
 
 " Uses ripgrep to drive fzf.
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number
     \ --no-heading --fixed-strings --ignore-case --hidden --follow --glob
     \ "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
