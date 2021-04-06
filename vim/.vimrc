@@ -424,9 +424,9 @@ nmap z? <Plug>(incsearch-easymotion-?)
 nmap zg/ <Plug>(incsearch-easymotion-stay)
 
 " LSP Mappings.
-" Map `;` to query LSP for 'GOTO definition'.
 nmap <silent> ; <Plug>(coc-definition)
 nmap <silent> <F12> <Plug>(coc-references)
+nmap <silent> <Leader><F2> <Plug>(coc-rename)
 
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
