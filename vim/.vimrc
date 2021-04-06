@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'inkarkat/vim-ingo-library'
 
 " Major features ===============================================================
-" Fuzzy file finder
+" Fuzzy file finder.
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Powerline enabled status bar.
@@ -93,7 +93,7 @@ colorscheme PaperColor
 " Sets the airline theme to PaperColor.
 let g:airline_theme='papercolor'
 
-" Let the theme style the indent guides
+" Let the theme style the indent guides.
 let g:indent_guides_auto_colors=0
 
 " Adds folder icons to folders in NERDTree.
@@ -113,7 +113,7 @@ let g:signify_line_highlight = 0
 " to the cursor line.
 set number relativenumber
 
-" Remove preview window from autocomplete
+" Remove preview window from autocomplete.
 set completeopt-=preview
 
 " Enable syntax highlighting.
@@ -135,7 +135,7 @@ set backspace=indent,eol,start
 set textwidth=80
 
 " Always keep 7 lines of buffer between cursor line and top/bottom of window
-" when scrolling
+" when scrolling.
 set scrolloff=7
 
 " Allows sending more characters to the terminal for drawing, since my terminal
@@ -207,7 +207,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMapOpenVSplit='\s'
 let NERDTreeMapToggleFilters='\f'
 
-" Disables rust.vim's line wrapping at 99 columns
+" Disables rust.vim's line wrapping at 99 columns.
 let g:rust_recommended_style = 0
 
 " Enables indent guides when starting VIM.
@@ -357,7 +357,7 @@ noremap l t
 
 nnoremap <Leader>b :Buffers<CR>
 
-" Map `<leader>[1-9]` to open buffer `[1-9]`
+" Map `<leader>[1-9]` to open buffer `[1-9]`.
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -370,9 +370,9 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
-" Map `<leader>x` to close the current buffer
+" Map `<leader>x` to close the current buffer.
 nnoremap <Leader>x :bd<CR>
-" Map `<leader><Esc>` to close ALL buffers
+" Map `<leader><Esc>` to close ALL buffers.
 nnoremap <Leader><Esc> :%bdelete<CR>
 
 " Utility mappings -------------------------------------------------------------
@@ -380,7 +380,7 @@ nnoremap <Leader><Esc> :%bdelete<CR>
 " Use `h` as a mapping for replace. This is because `r` is remapped to a motion.
 noremap h r
 
-" Use `dp` (delete pair) to delete a pair of grouping delimiters, e.g. {}/[]/()
+" Use `dp` (delete pair) to delete a pair of grouping delimiters, e.g. {}/[]/().
 noremap dp %x<C-o>x
 
 " Map `tab` to perform autocompletions.
@@ -388,12 +388,12 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-" Opposite of `J`, inserts a newline at the cursor
+" Opposite of `J`, inserts a newline at the cursor.
 noremap K i<Cr><Esc>f$
 
-" Reload ~/.vimrc with `,.`
+" Reload ~/.vimrc with `,.`.
 noremap <Leader>. :source $MYVIMRC<CR>
-" Open ~/.vimrc with `,ev`
+" Open ~/.vimrc with `,ev`.
 noremap <Leader>ev :vsplit $MYVIMRC<CR>
 
 " `,p` yanks the current buffer's file path relative to vim's cwd.
@@ -435,10 +435,10 @@ nmap <Leader>` <Plug>MarkRegex
 xmap <Leader>` <Plug>MarkRegex
 omap <Leader>` <Plug>MarkRegex
 
-" Open NERDTree with `,n`
+" Open NERDTree with `,n`.
 noremap <Leader>n :NERDTreeToggle<CR>
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip).
 xmap ga <Plug>(EasyAlign)
 
 " Add mappings to select function parameters (or any swappable text objects).
