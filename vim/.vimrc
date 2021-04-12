@@ -30,6 +30,8 @@ Plug 'andrewmacp/llvm.vim'
 Plug 'derekwyatt/vim-scala'
 
 " Minor features ===============================================================
+" Snippets engine.
+Plug 'SirVer/ultisnips'
 " Git/mercurial information in the gutter.
 Plug 'mhinz/vim-signify'
 " Git support.
@@ -199,6 +201,9 @@ if has('nvim')
 endif
 
 " Plugin settings --------------------------------------------------------------
+
+" Ctrl+e expands a snippet (insert mode).
+let g:UltiSnipsExpandTrigger = "<c-e>"
 
 " Use Space for single character easymotion.
 nmap <Space> <Plug>(easymotion-overwin-f)
