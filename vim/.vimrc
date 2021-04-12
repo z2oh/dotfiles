@@ -199,6 +199,11 @@ if has('nvim')
 endif
 
 " Plugin settings --------------------------------------------------------------
+
+" Use Space for single character easymotion.
+nmap <Space> <Plug>(easymotion-overwin-f)
+vmap <Space> <Plug>(easymotion-overwin-f)
+
 " Close the NERDTree window when opening a file.
 let NERDTreeQuitOnOpen = 1
 
