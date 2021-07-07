@@ -28,6 +28,8 @@ Plug 'dag/vim-fish'
 Plug 'andrewmacp/llvm.vim'
 " Scala language plugin.
 Plug 'derekwyatt/vim-scala'
+" ABNF syntax highlighting.
+Plug 'skilstak/vim-abnf-utf8'
 
 " Minor features ===============================================================
 " Snippets engine.
@@ -293,6 +295,11 @@ augroup highlight_syntax
 augroup END
 
 " Filetype autocommands --------------------------------------------------------
+
+augroup filetype_abnf
+    autocmd!
+    autocmd FileType abnf :set nospell
+augroup END
 
 augroup filetype_scala
     autocmd!
