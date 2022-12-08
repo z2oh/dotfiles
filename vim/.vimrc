@@ -441,9 +441,17 @@ nmap z? <Plug>(incsearch-easymotion-?)
 nmap zg/ <Plug>(incsearch-easymotion-stay)
 
 " LSP Mappings.
+" Map `;` to query LSP for 'GOTO definition'.
 nmap <silent> ; <Plug>(coc-definition)
 nmap <silent> <F12> <Plug>(coc-references)
 nmap <silent> <Leader><F2> <Plug>(coc-rename)
+
+" Map tab and shift-tab to navigate autocompletion list.
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" Map enter to apply autocompletion.
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Clear highlights with `,k`; this is primarily to free up `,n` for the NERDTree
 " toggle below.
