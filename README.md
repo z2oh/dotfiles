@@ -25,6 +25,10 @@ Directories marked with a ❗ are important, commonly used, or otherwise critica
 
 *  Configuration file for the [`i3`](https://i3wm.org/) tiling window manager.
 
+#### `iterm2`
+
+* Configuration file for the [`iterm2`](https://iterm2.com/) terminal emulator.
+
 #### `konsole`
 
 * Configuration files for the [`konsole`](https://konsole.kde.org/) terminal emulator. Most importantly: a custom implementation of the PaperColor-Light color scheme.
